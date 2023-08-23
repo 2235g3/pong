@@ -1,6 +1,7 @@
 package gh.nijd.pong;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,12 +19,12 @@ public class ApplicationStart extends Application {
         stage.show();
     }
 
-    public void exitGame() {
+    public void exitGame(ActionEvent event) {
         System.exit(1);
     }
 
-    public void startGame() {
-
+    public void startGame(ActionEvent event) {
+        new Console().selectNewScene("game.fxml", event);
     }
 
     public static void main(String[] args) {
