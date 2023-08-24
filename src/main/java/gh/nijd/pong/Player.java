@@ -13,8 +13,10 @@ public class Player {
     public Rectangle r;
     public int points = 0;
 
-    int xPos = 20;
-    int yPos = 0;
+    public int sensitivity = 10;
+
+    public int xPos = 20;
+    public int yPos = 0;
     final Color fillColor = Color.WHITE;
     final int width = 50;
     final int height = 150;
@@ -36,22 +38,6 @@ public class Player {
         rectangleDimensions();
         r = new Rectangle(xPos, yPos, width, height);
         r.setFill(fillColor);
-        EventHandler<KeyEvent> eventHandler = new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCode()) {
-                    case S:
-                        System.out.println("Text");
-                        yPos += 15;
-                        r.setY(yPos);
-                    case W:
-                        System.out.println("Test");
-                        yPos -= 15;
-                        r.setY(yPos);
-                }
-            }
-        };
-        r.addEventHandler(KeyEvent.KEY_PRESSED, eventHandler);
         gamePane.getChildren().add(r);
     }
 
@@ -61,9 +47,5 @@ public class Player {
         }
 
         yPos = (750 / 2) - (height / 2);
-    }
-
-    private void rectangleEvents() {
-
     }
 }

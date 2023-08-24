@@ -18,6 +18,7 @@ public class Console {
             root = FXMLLoader.load(getClass().getResource(fileName)); // Gets the new FXML scene
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // Gets the stage that is to be changed
             newScene = new Scene(root); // Makes the FXML into a scene
+            newScene.getRoot().requestFocus(); // Requests focus so the container can send updates and get focus
             stage.setScene(newScene); // Sets the new scene
             stage.show(); // Displays the new scene
         } catch (Exception e) {
