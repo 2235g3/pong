@@ -3,6 +3,7 @@ package gh.nijd.pong;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
 
 public class GameController {
     @FXML
@@ -11,6 +12,10 @@ public class GameController {
     Label pOneScore;
     @FXML
     Label pTwoScore;
+    @FXML
+    Line leftEnd;
+    @FXML
+    Line rightEnd;
 
     public void initialize() {
         Player p1 = new Player("Player One", "p1");

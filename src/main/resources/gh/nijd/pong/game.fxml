@@ -18,5 +18,7 @@
             <Font name="System Bold" size="39.0" />
          </font>
       </Label>
+      <Line fx:id="leftEnd" endX="-100.0" endY="750.0" layoutX="101.0" startX="-100.0" stroke="RED" strokeWidth="5.0" />
+      <Line fx:id="rightEnd" endX="100.0" layoutX="1399.0" startX="100.0" startY="750.0" stroke="RED" strokeWidth="5.0" />
    </children>
 </Pane>
