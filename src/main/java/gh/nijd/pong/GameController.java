@@ -68,15 +68,15 @@ public class GameController {
                     p1.yPos += p1.sensitivity;
                     p1.r.setY(p1.yPos);
                 }
-                else if (p1up) {
+                if (p1up) {
                     p1.yPos -= p1.sensitivity;
                     p1.r.setY(p1.yPos);
                 }
-                else if (p2down) {
+                if (p2down) {
                     p2.yPos += p2.sensitivity;
                     p2.r.setY(p2.yPos);
                 }
-                else if (p2up) {
+                if (p2up) {
                     p2.yPos -= p2.sensitivity;
                     p2.r.setY(p2.yPos);
                 }
