@@ -7,13 +7,13 @@
 
 <Pane fx:id="gamePane" maxHeight="750.0" maxWidth="1500.0" minHeight="750.0" minWidth="1500.0" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" prefHeight="750.0" prefWidth="1500.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gh.nijd.pong.GameController">
    <children>
-      <Line endX="750.0" endY="750.0" fill="WHITE" startX="750.0" stroke="WHITE" />
-      <Label fx:id="pOneScore" layoutX="760.0" layoutY="14.0" style="-fx-font-family: aldrich;" stylesheets="@stylesheets/fonts.css" text="0" textFill="WHITE">
+      <Line endX="750.0" endY="750.0" fill="WHITE" startX="750.0" stroke="#a0a1a0" />
+      <Label fx:id="pOneScore" layoutX="760.0" layoutY="14.0" style="-fx-font-family: aldrich;" stylesheets="@stylesheets/fonts.css" text="0" textFill="#a0a1a0">
          <font>
             <Font name="System Bold" size="39.0" />
          </font>
       </Label>
-      <Label fx:id="pTwoScore" layoutX="710.0" layoutY="14.0" style="-fx-font-family: aldrich;" stylesheets="@stylesheets/fonts.css" text="0" textFill="WHITE">
+      <Label fx:id="pTwoScore" layoutX="710.0" layoutY="14.0" style="-fx-font-family: aldrich;" stylesheets="@stylesheets/fonts.css" text="0" textFill="#a0a1a0">
          <font>
             <Font name="System Bold" size="39.0" />
          </font>

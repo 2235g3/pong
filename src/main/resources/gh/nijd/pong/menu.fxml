@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1500.0" style="-fx-background-color: black; -fx-border-color: green; -fx-border-width: 7;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gh.nijd.pong.ApplicationStart">
+<AnchorPane prefHeight="750.0" prefWidth="1500.0" style="-fx-background-color: black; -fx-border-color: green; -fx-border-width: 7;" stylesheets="@stylesheets/fonts.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gh.nijd.pong.ApplicationStart">
       <Button layoutX="670.0" layoutY="329.0" mnemonicParsing="false" onAction="#startGame" prefHeight="60.0" prefWidth="200.0" text="Start Game" />
-      <Label alignment="CENTER" layoutX="448.0" layoutY="67.0" prefHeight="192.0" prefWidth="633.0" text="Pong Game created by 2235g3 &amp; Nikita-Izbrodin" textAlignment="CENTER" textFill="#a0a1a0" textOverrun="CLIP" wrapText="true">
+      <Label alignment="CENTER" layoutX="448.0" layoutY="67.0" prefHeight="192.0" prefWidth="633.0" style="-fx-font-family: aldrich;" text="Pong Game created by 2235g3 &amp; Nikita-Izbrodin" textAlignment="CENTER" textFill="#a0a1a0" textOverrun="CLIP" wrapText="true">
          <font>
             <Font name="Dubai Light" size="48.0" />
          </font>
