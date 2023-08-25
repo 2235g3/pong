@@ -65,20 +65,40 @@ public class GameController {
             @Override
             public void handle(long l) {
                 if (p1down) {
-                    p1.yPos += p1.sensitivity;
-                    p1.r.setY(p1.yPos);
+                    if (p1.yPos > 750 - p1.height - p1.sensitivity) {
+                        p1.r.setY(750 - p1.height);
+                    }
+                    else{
+                        p1.yPos += p1.sensitivity;
+                        p1.r.setY(p1.yPos);
+                    }
                 }
                 if (p1up) {
-                    p1.yPos -= p1.sensitivity;
-                    p1.r.setY(p1.yPos);
+                    if (p1.yPos < p1.sensitivity) {
+                        p1.r.setY(0);
+                    }
+                    else {
+                        p1.yPos -= p1.sensitivity;
+                        p1.r.setY(p1.yPos);
+                    }
                 }
                 if (p2down) {
-                    p2.yPos += p2.sensitivity;
-                    p2.r.setY(p2.yPos);
+                    if (p2.yPos > 750 - p2.height - p2.sensitivity) {
+                        p2.r.setY(750 - p2.height);
+                    }
+                    else {
+                        p2.yPos += p2.sensitivity;
+                        p2.r.setY(p2.yPos);
+                    }
                 }
                 if (p2up) {
-                    p2.yPos -= p2.sensitivity;
-                    p2.r.setY(p2.yPos);
+                    if (p2.yPos < p2.sensitivity) {
+                        p2.r.setY(0);
+                    }
+                    else {
+                        p2.yPos -= p2.sensitivity;
+                        p2.r.setY(p2.yPos);
+                    }
                 }
             }
         };
