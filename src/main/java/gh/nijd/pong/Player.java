@@ -14,7 +14,7 @@ public class Player {
 
     public int xPos = 20;
     public int yPos = 0;
-    final Color fillColor = Color.WHITE;
+    public Color fillColor = Color.WHITE;
     final int width = 50;
     final int height = 150;
 

@@ -11,5 +11,6 @@
             <Font name="Dubai Light" size="48.0" />
          </font>
       </Label>
-      <Button layoutX="670.0" layoutY="466.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="60.0" prefWidth="200.0" text="Exit Game" />
+      <Button layoutX="670.0" layoutY="537.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="60.0" prefWidth="200.0" text="Exit Game" />
+   <Button layoutX="670.0" layoutY="438.0" mnemonicParsing="false" onAction="#settings" prefHeight="60.0" prefWidth="200.0" text="Settings" />
 </AnchorPane>
