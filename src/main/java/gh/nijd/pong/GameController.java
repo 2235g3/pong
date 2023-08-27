@@ -108,6 +108,8 @@ public class GameController {
         }
     }
 
+
+
     public void initialize() {
         Alert gamePaused = gamePausedAlert(); // Creates alert to be used when the game is paused
 
@@ -135,6 +137,9 @@ public class GameController {
                         }
                     });
                 }
+
+                // In-game music
+
             }
         };
 

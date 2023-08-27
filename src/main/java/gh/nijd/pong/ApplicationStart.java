@@ -57,6 +57,7 @@ public class ApplicationStart extends Application {
         p2 = playerArr[1];
     }
     public static void main(String[] args) {
+        new Console().playMusic("game.wav");
         launch();
     }
 }
