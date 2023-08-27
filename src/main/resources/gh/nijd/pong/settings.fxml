@@ -49,5 +49,11 @@
          </font>
       </Label>
       <Button layoutX="1335.0" layoutY="634.0" mnemonicParsing="false" onAction="#p2SaveSettings" text="Player 2 Save" />
+      <CheckBox fx:id="fullscreenOption" layoutX="631.0" layoutY="527.0" mnemonicParsing="false" style="-fx-font-family: aldrich;" text="Fullscreen" textFill="#a0a1a0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </CheckBox>
+      <Button layoutX="621.0" layoutY="603.0" mnemonicParsing="false" onAction="#generalSaveSettings" text="General Save" />
    </children>
 </Pane>

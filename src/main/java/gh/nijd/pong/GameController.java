@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 
 import java.util.Optional;
 
@@ -20,12 +21,12 @@ public class GameController {
     @FXML
     Line leftEnd, rightEnd;
 
-    boolean p1up = false, p1down = false, p2up = false, p2down = false, escape = false;
+    boolean p1up = false, p1down = false, p2up = false, p2down = false, pause = false;
     private static Player p1, p2;
 
     @FXML
     public void keyPressed(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
+        switch (keyEvent.getCode()) { // When a key is pressed, its corresponding bool var becomes true, indicating it has been pressed, to be dealt with in the game loop
             case S:
                 p1down = true;
                 break;
@@ -38,15 +39,15 @@ public class GameController {
             case UP:
                 p2up = true;
                 break;
-            case ESCAPE:
-                escape = true;
+            case P:
+                pause = true;
                 break;
         }
     }
 
     @FXML
     public void keyReleased(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
+        switch (keyEvent.getCode()) { // When a key is released, its corresponding bool var becomes false, indicating it is no longer pressed
             case S:
                 p1down = false;
                 break;
@@ -59,8 +60,8 @@ public class GameController {
             case UP:
                 p2up = false;
                 break;
-            case ESCAPE:
-                escape = false;
+            case P:
+                pause = false;
                 break;
         }
     }
@@ -70,87 +71,77 @@ public class GameController {
         p2 = playerArr[1];
     }
 
-    public void quitGame() {
-        // Make it go to the menu (Idk where an Event will come from, ns if possible)
-    }
-
-    public void initialize() { // Messy, needs cleaning
+    public Alert gamePausedAlert() {
         Alert gamePaused = new Alert(Alert.AlertType.CONFIRMATION);
         gamePaused.setHeaderText("Game Paused");
         gamePaused.setTitle("Game Paused");
         gamePaused.setContentText("");
-        gamePaused.getButtonTypes().clear();
+        gamePaused.getButtonTypes().clear(); // Clears current buttons on alert
+
+        // Creates new button options for the alert
         ButtonType quitButton = new ButtonType("Quit");
         ButtonType playButton = new ButtonType("Continue");
 
+        // Adds button options to the alert
         gamePaused.getButtonTypes().addAll(quitButton, playButton);
+        return gamePaused;
+    }
 
-        AnimationTimer gameLoop = new AnimationTimer() {
+    public void playerMovement(boolean keyOne, boolean keyTwo, Player currPlayer) {
+        if (keyOne) {
+            if (currPlayer.yPos > currPlayer.windowHeight - currPlayer.rHeight - currPlayer.sensitivity) { // If the player's sensitivity will take them below the screen it will set the player to the lowest they can go, no matter their sensitivity they will always end at the same yPos
+                currPlayer.r.setY(currPlayer.windowHeight - currPlayer.rHeight);
+            }
+            else{ // Moves the player down by their sensitivity
+                currPlayer.yPos += currPlayer.sensitivity;
+                currPlayer.r.setY(currPlayer.yPos);
+            }
+        }
+        if (keyTwo) {
+            if (currPlayer.yPos < currPlayer.sensitivity) { // Same as above, except for going up
+                currPlayer.r.setY(0);
+            }
+            else {
+                currPlayer.yPos -= currPlayer.sensitivity;
+                currPlayer.r.setY(currPlayer.yPos);
+            }
+        }
+    }
+
+    public void initialize() {
+        Alert gamePaused = gamePausedAlert(); // Creates alert to be used when the game is paused
+
+        // --- Inspiration from https://stackoverflow.com/questions/13796595/return-result-from-javafx-platform-runlater and https://stackoverflow.com/questions/29962395/how-to-write-a-keylistener-for-javafx ---
+        AnimationTimer gameLoop = new AnimationTimer() { // Creates the game loop
             @Override
-            public void handle(long l) { // Player movement has to become flexible to window height --- messy, needs cleaning
-                if (p1down) {
-                    if (p1.yPos > 750 - p1.height - p1.sensitivity) {
-                        p1.r.setY(750 - p1.height);
-                    }
-                    else{
-                        p1.yPos += p1.sensitivity;
-                        p1.r.setY(p1.yPos);
-                    }
-                }
-                if (p1up) {
-                    if (p1.yPos < p1.sensitivity) {
-                        p1.r.setY(0);
-                    }
-                    else {
-                        p1.yPos -= p1.sensitivity;
-                        p1.r.setY(p1.yPos);
-                    }
-                }
-                if (p2down) {
-                    if (p2.yPos > 750 - p2.height - p2.sensitivity) {
-                        p2.r.setY(750 - p2.height);
-                    }
-                    else {
-                        p2.yPos += p2.sensitivity;
-                        p2.r.setY(p2.yPos);
-                    }
-                }
-                if (p2up) {
-                    if (p2.yPos < p2.sensitivity) {
-                        p2.r.setY(0);
-                    }
-                    else {
-                        p2.yPos -= p2.sensitivity;
-                        p2.r.setY(p2.yPos);
-                    }
-                }
-                if (escape) {
-                    stop();
-                    final Optional<ButtonType>[] bt = new Optional[1];
-                    Platform.runLater(new Runnable() {
+            public void handle(long l) {
+                playerMovement(p1down, p1up, p1);
+                playerMovement(p2down, p2up, p2);
+
+                if (pause) {
+                    stop(); // When escape is pressed the game loop stops
+                    final Optional<ButtonType>[] bt = new Optional[1]; // Inits arr to store result from alert
+                    Platform.runLater(new Runnable() { // Using Alert.showAndWait() causes a runtime error due to the current loop being performed so the action must be performed after the current loop is finished
                         @Override
                         public void run() {
                             bt[0] = gamePaused.showAndWait();
-                            if (bt[0].get().getText().equals("Quit")) {
-                                System.exit(0); // Need to make it go to menu screen, but I am too tired, apologies future me (or Nik)
+                            if (bt[0].get().getText().equals("Quit")) { // If the player quits, they get taken to the menu page
+                                new Console().selectNewScene("menu.fxml", (Stage) gamePane.getScene().getWindow(), ((Stage) gamePane.getScene().getWindow()).isFullScreen());
                             }
                             else {
-                                start();
+                                start(); // If they want to continue, the game loop starts
                             }
-                            escape = false;
-                            p1up = false;
-                            p1down = false;
-                            p2up = false;
-                            p2down = false;
+                            pause = p1up = p1down = p2up = p2down = false; // These bool vars need to be reset otherwise the player will move constantly until user input after the game restarts
                         }
                     });
                 }
             }
         };
 
+        // Inits player rectangles
         p1.initRectangle(gamePane);
         p2.initRectangle(gamePane);
 
-        gameLoop.start();
+        gameLoop.start(); // Starts the gameloop for the first time
     }
 }
